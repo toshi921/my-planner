@@ -14,14 +14,22 @@
 
 .backupbar{padding:10px 15px;border-bottom:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap;align-items:center}.backupbar button{border:1px solid #a5bed9;background:white;color:#205b9d;border-radius:9px;padding:9px 12px;font-size:13px;font-weight:750}.backupbar small{flex-basis:100%;font-size:11px;color:var(--sub)}
 
-/* Ver.0.4.1: fit full duty names into narrow phone calendar columns */
+/* Ver.0.4.2: prioritize duty name readability on phones. */
 @media(max-width:649px){
-  .shift span:first-child{font-size:10px;letter-spacing:-.55px;font-weight:800}
+  .shift span{font-size:10px;letter-spacing:-.15px;line-height:1.4}
+  .shift span:first-child{
+    font-size:11.5px;font-weight:850;letter-spacing:-.35px;
+    width:119%;max-width:none;flex:none;
+    transform:scaleX(.84);transform-origin:left center;
+    text-overflow:clip;
+  }
 }
 @media(max-width:380px){
-  .shift span:first-child{font-size:9.5px;letter-spacing:-.65px;font-weight:800}
+  .shift span{font-size:9.5px}
+  .shift span:first-child{font-size:11px;width:122%;transform:scaleX(.82);letter-spacing:-.4px}
 }
-</style></head><body><main class="app"><header><div class="top"><div><div class="brand">MY PLANNER · Ver.0.4.1</div><div class="title" id="monthTitle"></div></div><div class="nav"><button class="iconbtn" id="prev" aria-label="前の月">‹</button><button class="today" id="todayBtn">今月</button><button class="iconbtn" id="next" aria-label="次の月">›</button></div></div><div class="hint">日付をタップ → 予定一覧 ／ 予定をタップ → 詳細・編集</div></header><div class="setupbar"><p id="rosterStatus">輪番：未設定</p><button id="rosterBtn">⚙ 輪番を設定</button></div><div class="backupbar"><button id="exportData" type="button">⬇ データを書き出す</button><button id="importData" type="button">⬆ データを読み込む</button><input id="importFile" type="file" accept=".json,application/json" hidden><small>PCとiPhone間の移行用。自動同期ではありません。</small></div><div class="weekdays"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div><div class="calendar" id="calendar"></div><section class="bottom"><div class="section-title"><h2 id="selectedTitle"></h2><button class="primary" id="add">＋ 予定を追加</button></div><div id="dayEntries"></div></section><div class="footer">Ver.0.4：データの書き出し・読み込みに対応。28日周期の基本輪番に対応。土日a/b・四半期の公休日移動は未対応です。実際の勤務表と照合してください。データはこの端末内だけに保存されます。</div></main><div id="modal"></div><script>
+
+</style></head><body><main class="app"><header><div class="top"><div><div class="brand">MY PLANNER · Ver.0.4.2.1</div><div class="title" id="monthTitle"></div></div><div class="nav"><button class="iconbtn" id="prev" aria-label="前の月">‹</button><button class="today" id="todayBtn">今月</button><button class="iconbtn" id="next" aria-label="次の月">›</button></div></div><div class="hint">日付をタップ → 予定一覧 ／ 予定をタップ → 詳細・編集</div></header><div class="setupbar"><p id="rosterStatus">輪番：未設定</p><button id="rosterBtn">⚙ 輪番を設定</button></div><div class="backupbar"><button id="exportData" type="button">⬇ データを書き出す</button><button id="importData" type="button">⬆ データを読み込む</button><input id="importFile" type="file" accept=".json,application/json" hidden><small>PCとiPhone間の移行用。自動同期ではありません。</small></div><div class="weekdays"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div><div class="calendar" id="calendar"></div><section class="bottom"><div class="section-title"><h2 id="selectedTitle"></h2><button class="primary" id="add">＋ 予定を追加</button></div><div id="dayEntries"></div></section><div class="footer">Ver.0.4.2：データの書き出し・読み込みに対応。28日周期の基本輪番に対応。土日a/b・四半期の公休日移動は未対応です。実際の勤務表と照合してください。データはこの端末内だけに保存されます。</div></main><div id="modal"></div><script>
 const $=id=>document.getElementById(id), now=new Date();let year=now.getFullYear(),month=now.getMonth(),selected=now.getDate();const key=(y,m,d)=>`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;let store={};try{store=JSON.parse(localStorage.getItem('planner_demo_v1')||'{}')}catch(e){};const save=()=>localStorage.setItem('planner_demo_v1',JSON.stringify(store));const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const rosterKey='planner_roster_v03';let roster=null;try{roster=JSON.parse(localStorage.getItem(rosterKey)||'null')}catch(e){};
 function dateDiff(a,b){const parse=x=>{let [y,m,d]=x.split('-').map(Number);return Date.UTC(y,m-1,d)/86400000};return parse(a)-parse(b)}
