@@ -1,0 +1,317 @@
+<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>わたしの手帳 | Ver.0.8.1</title><style>
+:root{--bg:#f6f8fb;--card:#fff;--ink:#203044;--sub:#708096;--line:#e6ebf1;--blue:#3178c6;--off:#f6ead4;--paid:#dff3e9;--weekend:#fbf5f4}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Yu Gothic",Meiryo,sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1000px;margin:auto;min-height:100vh;background:var(--card)}header{padding:18px 18px 12px;border-bottom:1px solid var(--line)}.top{display:flex;justify-content:space-between;align-items:center;gap:8px}.brand{font-size:12px;color:var(--sub);letter-spacing:.1em}.title{font-size:22px;font-weight:800}.nav{display:flex;align-items:center;gap:8px}.iconbtn{border:1px solid var(--line);background:white;border-radius:12px;padding:8px 12px;font-size:18px}.today{border:1px solid var(--line);background:#f6f9fd;color:var(--blue);border-radius:10px;padding:7px 10px;font-size:12px}.hint{font-size:12px;color:var(--sub);margin-top:9px}.weekdays,.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}.weekdays{border-bottom:1px solid var(--line)}.weekdays span{text-align:center;padding:10px 0;font-size:12px;font-weight:700;color:var(--sub)}.weekdays span:first-child{color:#d36b69}.weekdays span:last-child{color:#5688c3}.day{min-width:0;min-height:111px;padding:5px 3px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:white;text-align:left;display:flex;flex-direction:column;gap:2px;overflow:hidden}.day:nth-child(7n+1){background:#fffafa}.day:nth-child(7n){background:#f9fbff}.day.outside{background:#f4f6f9}.day.selected{box-shadow:inset 0 0 0 2px var(--blue);background:#f1f7ff}.daynum{font-size:12px;font-weight:700;padding:0 2px 2px}.daynum.todaynum{background:var(--blue);color:white;border-radius:100px;display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px}.shift{display:flex;flex-direction:column;gap:1px;border-radius:4px;background:#eaf3fc;padding:3px 2px;max-width:100%}.shift.off{background:#fff0d8}.shift.paid{background:#e1f5e8}.shift span{display:block;font-size:10px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.shift span:first-child{font-weight:800}.event{display:block;font-size:10px;line-height:1.3;padding:2px;border-radius:3px;background:#f1e9fb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.more{font-size:10px;color:var(--blue);padding-left:2px}.bottom{padding:18px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.section-title h2{font-size:17px;margin:0}.primary{background:var(--blue);color:white;border:0;border-radius:12px;padding:10px 13px;font-size:13px;font-weight:700}.entry{display:flex;align-items:center;justify-content:space-between;padding:13px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:white;text-align:left;width:100%;gap:10px}.entry strong{font-size:14px}.entry small{color:var(--sub);display:block;margin-top:3px}.tag{font-size:11px;color:var(--blue);background:#eaf3fc;padding:5px 7px;border-radius:8px;white-space:nowrap}.shade{position:fixed;inset:0;background:#10223878;z-index:5;display:flex;align-items:flex-end;justify-content:center}.sheet{background:white;width:100%;max-width:550px;max-height:88vh;overflow:auto;border-radius:22px 22px 0 0;padding:20px;box-shadow:0 -8px 30px #15263c22}.sheethead{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.sheet h3{margin:0;font-size:20px}.close{border:0;background:#edf1f5;border-radius:50%;width:34px;height:34px;font-size:18px}.field{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-size:13px;font-weight:700}.field input,.field select,.field textarea{border:1px solid #cfd8e3;border-radius:10px;padding:12px;width:100%;background:white;color:var(--ink)}.field textarea{min-height:90px}.actions{display:flex;gap:8px;margin-top:16px}.actions button{flex:1}.secondary{border:1px solid var(--line);border-radius:12px;background:white;padding:10px}.danger{color:#b83d43}.note{font-size:12px;color:var(--sub);line-height:1.6}.mini{font-size:13px;color:var(--sub)}.empty{color:var(--sub);font-size:13px}.detail{background:#f5f8fc;border-radius:14px;padding:14px;line-height:1.8}.detail b{display:inline-block;min-width:76px}.footer{padding:12px 18px 25px;color:var(--sub);font-size:11px;border-top:1px solid var(--line)}@media(min-width:650px){.day{min-height:137px;padding:7px}.shift span,.event{font-size:12px}.daynum{font-size:14px}.sheet{border-radius:20px;margin:auto;max-height:85vh}.shade{align-items:center}}@media(max-width:380px){.day{min-height:102px;padding:3px 2px}.shift span,.event,.more{font-size:9px}.shift{padding:2px 1px}.title{font-size:19px}}
+/* Mobile readability improvements; dates unchanged */
+.shift span{font-size:12px;font-weight:750;line-height:1.35;color:#172b42;letter-spacing:-.2px}
+.shift span:first-child{font-size:12px;font-weight:850}
+.shift{gap:1px;padding:4px 2px}
+.day{min-height:122px}
+.event{font-size:11px;font-weight:650;color:#3a2655}
+.more{font-size:11px;font-weight:700}
+@media(min-width:650px){.shift span{font-size:13px}.shift span:first-child{font-size:13px}.day{min-height:145px}}
+@media(max-width:380px){.day{min-height:117px;padding:3px 1px}.shift{padding:3px 1px}.shift span{font-size:11px;letter-spacing:-.35px}.shift span:first-child{font-size:11px}.event,.more{font-size:10px}}
+
+.setupbar{padding:10px 15px;background:#edf5ff;display:flex;align-items:center;justify-content:space-between;gap:8px}.setupbar p{margin:0;font-size:12px;line-height:1.5}.setupbar button{border:1px solid #9ebde4;border-radius:9px;background:white;color:#205b9d;padding:9px;font-size:12px;font-weight:750}.rostergrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.rosteritem{border:1px solid #dce4ed;padding:9px;border-radius:10px}.rosteritem strong{display:block;font-size:13px;margin-bottom:4px}.rosteritem input{width:100%;border:1px solid #cfd8e3;border-radius:6px;padding:7px;font-size:13px;margin:3px 0}.rosteritem.off{background:#fff4e2}.rosteritem small{font-size:11px;color:#61738a}.shift.unset{background:#f0f2f5}.shift.unset span{color:#61738a}.setupactions{display:flex;gap:8px;position:sticky;bottom:0;background:white;padding:10px 0}.setupactions button{flex:1}
+
+.backupbar{padding:10px 15px;border-bottom:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap;align-items:center}.backupbar button{border:1px solid #a5bed9;background:white;color:#205b9d;border-radius:9px;padding:9px 12px;font-size:13px;font-weight:750}.backupbar small{flex-basis:100%;font-size:11px;color:var(--sub)}
+
+/* Ver.0.8.1: prioritize duty name readability on phones. */
+@media(max-width:649px){
+  .shift span{font-size:10px;letter-spacing:-.15px;line-height:1.4}
+  .shift span:first-child{
+    font-size:11.5px;font-weight:850;letter-spacing:-.35px;
+    width:119%;max-width:none;flex:none;
+    transform:scaleX(.84);transform-origin:left center;
+    text-overflow:clip;
+  }
+}
+@media(max-width:380px){
+  .shift span{font-size:9.5px}
+  .shift span:first-child{font-size:11px;width:122%;transform:scaleX(.82);letter-spacing:-.4px}
+}
+
+
+/* Ver.0.8.1: prefer locally installed UD Digital Kyokasho fonts; no font redistribution. */
+body,button,input,select,textarea{
+  font-family:"UD Digi Kyokasho NP-R","UD Digi Kyokasho NK-R","UD デジタル 教科書体 NP-R","UD デジタル 教科書体 NK-R",-apple-system,BlinkMacSystemFont,"Yu Gothic",Meiryo,sans-serif;
+}
+/* Preserve compact shift labels across font changes. */
+.roster-tabs{display:flex;gap:6px;margin-bottom:10px}.roster-tabs button{flex:1;font-size:13px;padding:10px 4px}
+/* Weekly planner */
+.viewtabs{display:flex;gap:8px;margin-top:12px}.viewtabs button{flex:1;border:1px solid #c9d7e6;background:#fff;border-radius:10px;padding:10px;font-weight:800;color:#274b71}.viewtabs button.active{background:#17375e;color:#fff;border-color:#17375e}
+.weekly-area{padding:14px;background:#f3f6fa}.weekly-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,1fr);gap:14px}.weekly-panel{background:white;border:1px solid #e0e7f0;border-radius:14px;overflow:hidden}.weekly-panel-title{background:#17375e;color:white;padding:12px 14px;font-weight:800}.weekly-dates{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.weekly-dates button{border:1px solid #cbd9e8;border-radius:9px;padding:9px;background:#fff;color:#17375e;font-weight:700}.weekly-date-label{font-weight:800;font-size:15px;text-align:center}.weekly-day{display:flex;align-items:center;gap:10px;width:100%;min-height:69px;padding:9px 12px;border:0;border-bottom:1px solid #e6ebf1;background:white;text-align:left;color:var(--ink)}.weekly-day:last-child{border-bottom:0}.weekly-day:active{background:#edf5ff}.weekly-date{width:47px;flex:none;text-align:center}.weekly-date strong{display:block;font-size:18px}.weekly-date small{color:#63758b;font-size:11px}.weekly-main{flex:1;min-width:0}.weekly-shift{display:flex;justify-content:space-between;gap:6px;align-items:baseline}.weekly-shift strong{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.weekly-shift small{font-size:11px;color:#52657c;white-space:nowrap}.weekly-events{color:#55667a;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.weekly-arrow{color:#9aaac0}.weekly-side{display:flex;flex-direction:column;gap:12px}.weekly-content{padding:12px}.weekly-goal{display:flex;gap:8px;align-items:center;margin:8px 0}.weekly-goal input{width:18px;height:18px;flex:none}.weekly-goal span{flex:1;font-size:13px;overflow-wrap:anywhere}.weekly-add{background:#eef4fb;border:1px solid #c9d9e9;color:#17375e;border-radius:9px;padding:8px 10px;font-size:12px;font-weight:750}.weekly-field{display:block;font-size:12px;font-weight:750;margin:9px 0}.weekly-field textarea{display:block;width:100%;resize:vertical;min-height:60px;border:1px solid #d2dce8;border-radius:9px;padding:9px;margin-top:5px;font-size:13px}.weekly-save{background:#17375e;color:white;border:0;border-radius:9px;padding:9px 12px;font-weight:750;font-size:12px}.weekly-goal-remove{border:0;background:transparent;color:#a04b50;font-size:18px;padding:3px 8px}.weekly-hint{color:#64768b;font-size:11px;margin:7px 0 0}
+@media(max-width:699px){.weekly-area{padding:8px}.weekly-layout{display:block}.weekly-side{margin-top:16px}.weekly-dates{margin-bottom:7px}.weekly-date-label{font-size:13px}.weekly-dates button{padding:8px}.weekly-day{height:calc((100svh - 205px)/7);min-height:55px;max-height:80px;padding:4px 8px;gap:7px}.weekly-date{width:38px}.weekly-date strong{font-size:16px}.weekly-date small{font-size:10px}.weekly-shift strong{font-size:13px}.weekly-shift small{font-size:10px}.weekly-events{font-size:11px;margin-top:1px}.weekly-panel-title{padding:9px 12px;font-size:13px}}
+
+/* Ver.0.8.4: shift and plans side-by-side */
+.weekly-main{display:grid;grid-template-columns:minmax(145px, 44%) minmax(0,1fr);align-items:center;column-gap:12px}
+.weekly-shift{min-width:0;display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.weekly-shift strong{max-width:none!important;font-size:13px}
+.weekly-shift small{font-size:11px;white-space:nowrap}
+.weekly-events{min-width:0;margin-top:0!important;padding-left:11px;border-left:1px solid #d9e3ef;color:#334d6b;font-size:12px;font-weight:600}
+.weekly-day{border-bottom-color:#dfe8f3}
+.weekly-panel-title{background:#17375e}
+@media(max-width:699px){.weekly-main{grid-template-columns:minmax(125px, 49%) minmax(0,1fr);column-gap:6px}.weekly-shift{gap:3px 6px}.weekly-shift strong{font-size:12px}.weekly-shift small{font-size:10px}.weekly-events{font-size:11px;padding-left:7px}.weekly-day{gap:6px}}
+@media(max-width:380px){.weekly-main{grid-template-columns:minmax(112px, 49%) minmax(0,1fr)}.weekly-shift strong{font-size:11px}.weekly-shift small{font-size:9px}}
+/* Ver.0.8.1 weekly refinements */
+.weekly-day.weekly-sat{background:#eff6ff;border-left:3px solid #77a8df}
+.weekly-day.weekly-sun{background:#fff0f1;border-left:3px solid #e8a0a6}
+.weekly-sat .weekly-date small,.weekly-sat .weekly-date strong{color:#2d69a8}
+.weekly-sun .weekly-date small,.weekly-sun .weekly-date strong{color:#bd5260}
+.weekly-shift{justify-content:flex-start;gap:9px;align-items:baseline;min-width:0}
+.weekly-shift strong{flex:none;max-width:52%}.weekly-shift small{overflow:hidden;text-overflow:ellipsis}
+.weekly-mini-head{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;font-weight:800;margin-bottom:8px}
+.weekly-mini-head button{border:1px solid #d2dce8;background:#f7faff;color:#17375e;border-radius:7px;padding:4px 10px}
+.weekly-mini-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;text-align:center}
+.weekly-mini-grid .mini-weekday{font-size:10px;color:#708096;padding:3px 0}
+.weekly-mini-grid .mini-weekday:nth-child(6){color:#2d69a8}
+.weekly-mini-grid .mini-weekday:nth-child(7){color:#bd5260}
+.weekly-mini-grid button{min-width:0;min-height:29px;padding:3px 0;border:0;background:transparent;border-radius:6px;color:#26374b;font-size:12px}
+.weekly-mini-grid button.mini-sat{color:#2d69a8;background:#f0f6ff}
+.weekly-mini-grid button.mini-sun{color:#bd5260;background:#fff1f2}
+.weekly-mini-grid button.mini-inweek{outline:2px solid #a4bedb;outline-offset:-2px;font-weight:800}
+.weekly-mini-grid button.mini-today{box-shadow:inset 0 0 0 2px #17375e}
+.weekly-mini-grid button:active{background:#dbeafa}
+@media(max-width:699px){.weekly-shift{gap:7px}.weekly-shift strong{max-width:53%}}
+.cloudbar{padding:10px 15px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#e9f5f0;border-bottom:1px solid #c9e5d9;font-size:12px}.cloudbar span{flex:1;min-width:160px}.cloudbar button{padding:8px 10px;border:1px solid #86b4a3;background:#fff;border-radius:9px;font-weight:700}.cloudlock[hidden]{display:none}.cloudlock{position:fixed;inset:0;background:#f6f8fb;z-index:20;display:flex;align-items:center;justify-content:center;padding:20px}.cloudlock>div{max-width:430px;background:white;border-radius:16px;padding:28px;box-shadow:0 4px 25px #10223822;line-height:1.8}.cloudlock button{padding:12px;border:0;background:#3178c6;color:#fff;border-radius:10px;font-weight:700;width:100%;margin-top:10px}.cloudlock small{display:block;color:#65768a;margin-top:10px}body.locked .app{visibility:hidden}</style></head><body><main class="app"><header><div class="top"><div><div class="brand">MY PLANNER · Ver.0.9.0</div><div class="title" id="monthTitle"></div></div><div class="nav"><button class="iconbtn" id="prev" aria-label="前の月">‹</button><button class="today" id="todayBtn">今月</button><button class="iconbtn" id="next" aria-label="次の月">›</button></div></div><div class="viewtabs"><button id="monthView" class="active" type="button">月間</button><button id="weekView" type="button">週間</button></div><div class="hint">日付をタップ → 予定一覧 ／ 予定をタップ → 詳細・編集</div></header><div class="cloudbar"><span id="cloudStatus">🔒 ログイン待ち</span><button id="cloudLogin" type="button">Googleでログイン</button><button id="cloudLogout" type="button" hidden>ログアウト</button></div><div class="setupbar"><p id="rosterStatus">輪番：未設定</p><button id="rosterBtn">⚙ 輪番を設定</button></div><div class="backupbar"><button id="exportData" type="button">⬇ データを書き出す</button><button id="importData" type="button">⬆ データを読み込む</button><input id="importFile" type="file" accept=".json,application/json" hidden><small>JSONバックアップは同期とは別に保管してください。</small></div><div id="monthlyArea"><div class="weekdays"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div><div class="calendar" id="calendar"></div></div><section id="weeklyArea" class="weekly-area" hidden></section><section class="bottom" id="monthlyBottom"><div class="section-title"><h2 id="selectedTitle"></h2><button class="primary" id="add">＋ 予定を追加</button></div><div id="dayEntries"></div></section><div class="footer">Ver.0.8.4：週間レフト型を追加。中休ダイヤの中間開放に対応。データの書き出し・読み込み、28日周期の平日・土曜・日祝ダイヤを自動切替。年末年始は空番。四半期の公休日移動（1・4・7・10月）に対応。実際の勤務表と照合してください。Googleログイン後はクラウド同期できます。</div></main><div id="modal"></div><div class="cloudlock" id="cloudLock"><div><h2>🔒 マイプランナー</h2><p>予定を表示するには、自分のGoogleアカウントでログインしてください。</p><button id="lockLogin">Googleでログイン</button><small id="lockMessage">ログイン後、初回だけデータの同期方法を選びます。</small></div></div><script type="module">import {initializeApp} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,getRedirectResult,onAuthStateChanged,signOut} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+import {getFirestore,doc,getDoc,onSnapshot,runTransaction} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
+const firebaseConfig={apiKey:"AIzaSyCQnVAcQOP8_HEAus_m1RsLprwpXkR9O3w",authDomain:"my-planner-76d2d.firebaseapp.com",projectId:"my-planner-76d2d",storageBucket:"my-planner-76d2d.firebasestorage.app",messagingSenderId:"396886202473",appId:"1:396886202473:web:c95886690bb6506b98aaf8"};
+const $=id=>document.getElementById(id), now=new Date();let year=now.getFullYear(),month=now.getMonth(),selected=now.getDate();const key=(y,m,d)=>`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;let store={};try{store=JSON.parse(localStorage.getItem('planner_demo_v1')||'{}')}catch(e){};const save=()=>{localStorage.setItem('planner_demo_v1',JSON.stringify(store));queueCloudSave()};const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const weeklyKey='planner_weekly_v08';let weeklyNotes={};try{weeklyNotes=JSON.parse(localStorage.getItem(weeklyKey)||'{}')||{}}catch(e){};const saveWeekly=()=>{localStorage.setItem(weeklyKey,JSON.stringify(weeklyNotes));queueCloudSave()};let view='month',weekStart=null;
+const rosterKey='planner_roster_v03';let roster=null;try{roster=JSON.parse(localStorage.getItem(rosterKey)||'null')}catch(e){};
+function dateDiff(a,b){const parse=x=>{let [y,m,d]=x.split('-').map(Number);return Date.UTC(y,m-1,d)/86400000};return parse(a)-parse(b)}
+function midDefaults(x){if(x?.midStart||x?.midEnd)return x;const n=(x?.duty||'').replace(/\s/g,'');if(n==='香椎37T'&&x.start==='06:51'&&x.end==='21:05')return {...x,midStart:'10:39',midEnd:'15:48'};if(n==='急行33T'&&x.start==='06:12'&&x.end==='19:26')return {...x,midStart:'13:02',midEnd:'16:45'};return x}
+function minutes(t){if(!/^\d{2}:\d{2}$/.test(t||''))return null;const [h,m]=t.split(':').map(Number);return h<24&&m<60?h*60+m:null}
+function duration(a,b){const x=minutes(a),y=minutes(b);if(x===null||y===null)return '—';const n=(y-x+1440)%1440;return `${Math.floor(n/60)}時間${String(n%60).padStart(2,'0')}分`}
+function midInfo(s){if(!s.midStart||!s.midEnd)return '';return `<div><b>前半勤務</b>${esc(s.start)} 〜 ${esc(s.midStart)}（${duration(s.start,s.midStart)}）</div><div><b>中間開放</b>${esc(s.midStart)} 〜 ${esc(s.midEnd)}（${duration(s.midStart,s.midEnd)}）</div><div><b>後半勤務</b>${esc(s.midEnd)} 〜 ${esc(s.end)}（${duration(s.midEnd,s.end)}）</div>`}
+// 曜日・祝日判定（2000〜2099年）。祝日と特別運行日は日祝ダイヤ優先。
+const specialDays={};
+function nthWeekday(y,m,weekday,n){const first=new Date(y,m-1,1).getDay();return 1+(weekday-first+7)%7+(n-1)*7}
+function japanHolidays(y){if(specialDays[y])return specialDays[y];const h=new Set();const add=(m,d)=>h.add(key(y,m-1,d));
+ add(1,1);add(2,11);add(2,23);add(4,29);add(5,3);add(5,4);add(5,5);add(8,11);add(11,3);add(11,23);
+ add(1,nthWeekday(y,1,1,2));add(7,nthWeekday(y,7,1,3));add(9,nthWeekday(y,9,1,3));add(10,nthWeekday(y,10,1,2));
+ if(y>=2000&&y<=2099){add(3,Math.floor(20.8431+0.242194*(y-1980)-Math.floor((y-1980)/4)));add(9,Math.floor(23.2488+0.242194*(y-1980)-Math.floor((y-1980)/4)))}
+ if(y===2020){h.delete(key(y,6,20));h.delete(key(y,9,12));h.delete(key(y,7,11));add(7,23);add(7,24);add(8,10)}
+ if(y===2021){h.delete(key(y,6,19));h.delete(key(y,9,11));h.delete(key(y,7,11));add(7,22);add(7,23);add(8,8)}
+ // 国民の休日：祝日に挟まれた平日
+ for(let m=1;m<=12;m++)for(let d=2;d<=30;d++){const t=new Date(y,m-1,d),k=key(y,t.getMonth(),t.getDate());if(t.getFullYear()!==y||h.has(k))continue;const a=new Date(y,m-1,d-1),b=new Date(y,m-1,d+1);if(h.has(key(a.getFullYear(),a.getMonth(),a.getDate()))&&h.has(key(b.getFullYear(),b.getMonth(),b.getDate())))h.add(k)}
+ // 振替休日：日曜祝日の後、最初の非祝日
+ const originals=[...h].sort();for(const k of originals){const [yy,mm,dd]=k.split('-').map(Number);const t=new Date(yy,mm-1,dd);if(t.getDay()!==0)continue;do{t.setDate(t.getDate()+1)}while(h.has(key(t.getFullYear(),t.getMonth(),t.getDate())));if(t.getFullYear()===y)h.add(key(t.getFullYear(),t.getMonth(),t.getDate()))}
+ specialDays[y]=h;return h}
+function dayKind(y,m,d){const date=new Date(y,m,d),mm=m+1;if((mm===12&&d>=31)||(mm===1&&d<=3))return 'newyear';if((mm===8&&d>=13&&d<=15)||(mm===12&&(d===29||d===30)))return 'holiday';if(japanHolidays(y).has(key(y,m,d))||date.getDay()===0)return 'holiday';return date.getDay()===6?'sat':'weekday'}
+const weekendSeed={
+ sat:{1:['香椎30B','12:21','23:03'],2:['香椎35','10:47','22:10'],3:['香椎34B','13:49','21:05'],4:['急行21','07:28','19:43'],5:['香椎34A','07:32','14:29'],8:[],9:['津2','08:20','18:37'],10:['津3T','07:22','21:18','13:08','17:05'],11:['古賀4','07:03','20:05'],12:['香椎32A','06:48','14:13'],15:[],16:['香椎33B','14:31','20:28'],17:['香椎31','06:44','20:02'],18:['古賀3','06:56','19:10'],19:['香椎33A','07:31','15:32'],22:['香椎32B','13:11','20:21'],23:['古賀2','06:18','19:13'],24:['津1','05:48','17:42'],25:['古賀1','06:07','18:59'],26:['香椎30A','04:44','11:25']},
+ holiday:{1:['香椎30B','12:22','23:02'],2:['香椎35','10:48','22:07'],3:['香椎34B','13:50','21:04'],4:['急行21','07:28','19:40'],5:['香椎34A','07:36','14:28'],8:[],9:['津2','08:20','18:37'],10:['津3T','07:22','21:18','13:08','17:05'],11:['古賀4','07:03','20:05'],12:['香椎32A','06:48','14:13'],15:[],16:['香椎33B','14:32','20:27'],17:['香椎31','06:48','20:01'],18:['古賀3','06:56','19:10'],19:['香椎33A','07:31','15:33'],22:['香椎32B','13:12','20:17'],23:['古賀2','06:18','19:13'],24:['津1','05:48','17:42'],25:['古賀1','06:07','18:59'],26:['香椎30A','04:45','11:26']}}
+function seededDays(kind){return Array.from({length:28},(_,i)=>{const a=weekendSeed[kind][i+1]||[];return {duty:a[0]||'',start:a[1]||'',end:a[2]||'',midStart:a[3]||'',midEnd:a[4]||''}})}
+// Ver.0.8.1: Saturday and Sunday use the same roster number on quarterly changeovers.
+// Anchor 2026-09-24 = ①, first verified repeat 2026-10-03/04 = ⑩.
+// For January, defer the repeat to the second weekend if the first Sat/Sun
+// intersects Jan 1-3 (special New Year service).
+function changeoverSaturday(y,m){
+  let sat=nthWeekday(y,m,6,1);
+  if(m===1&&(sat<=3||sat+1<=3))sat+=7;
+  return key(y,m-1,sat);
+}
+function changeoversThrough(dateStr){
+  const y=Number(dateStr.slice(0,4)),result=[];
+  for(let yr=2026;yr<=y;yr++)for(const m of [1,4,7,10]){
+    if(yr===2026&&m<10)continue;
+    const sat=changeoverSaturday(yr,m);
+    if(sat<=dateStr)result.push(sat);
+  }
+  return result;
+}
+function numberAt(dateStr){
+  const changes=changeoversThrough(dateStr);
+  // On Sunday of each changeover the roster number repeats Saturday's number.
+  const repeated=changes.filter(sat=>dateDiff(dateStr,sat)>=1).length;
+  return ((dateDiff(dateStr,roster.anchor)-repeated)%28+28)%28;
+}
+function quarterlyOpen(dateStr,n){
+  // When moving Fri/Sat off to Sat/Sun off, Friday is an open duty.
+  // When moving Sat/Sun off to Sun/Mon off, Monday is an open duty.
+  const day=new Date(dateStr+'T12:00:00').getDay();
+  const shiftDay=(str,days)=>{const [y,m,d]=str.split('-').map(Number);const t=new Date(Date.UTC(y,m-1,d+days));return t.toISOString().slice(0,10)};
+  for(const sat of changeoversThrough(shiftDay(dateStr,2))){
+    const fri=shiftDay(sat,-1),mon=shiftDay(sat,2);
+    if(dateStr===fri){
+      const f=numberAt(fri),s=numberAt(sat);
+      if(f%7===5&&s%7===6)return true;
+    }
+    if(dateStr===mon){
+      const s=numberAt(sat),m=numberAt(mon);
+      if(s%7===5&&m%7===6)return true;
+    }
+  }
+  return false;
+}
+function baseShift(d){const dt=key(year,month,d);if(!roster?.anchor||!Array.isArray(roster.days)||roster.days.length!==28)return {base:'未設定',mode:'unset',duty:'',start:'',end:''};const n=numberAt(dt);if(quarterlyOpen(dt,n))return {base:'空番',mode:'open',duty:'',start:'',end:''};if([5,6,12,13,19,20,26,27].includes(n))return {base:'公休',mode:'off',duty:'',start:'',end:''};const kind=dayKind(year,month,d);if(kind==='newyear')return {base:'空番',mode:'open',duty:'',start:'',end:''};const source=kind==='weekday'?roster.days:(roster[kind]||seededDays(kind));const entry=midDefaults(source[n]||{});if(!entry.duty)return {base:'空番',mode:'open',duty:'',start:'',end:''};return {base:entry.duty,mode:'normal',duty:entry.duty,start:entry.start||'',end:entry.end||'',midStart:entry.midStart||'',midEnd:entry.midEnd||''}}
+function getDay(d){const k=key(year,month,d);return {shift:store[k]?.shift||baseShift(d),events:store[k]?.events||[]}}
+function openRoster(kind='weekday'){let source=kind==='weekday'?(roster?.days||Array.from({length:28},()=>({duty:'',start:'',end:''}))):(roster?.[kind]||seededDays(kind));let initial=source.map(midDefaults);let anchor=roster?.anchor||key(year,month,1);show(head('28日輪番の設定')+`<div class="roster-tabs"><button type="button" class="secondary" id="tabWeek">平日</button><button type="button" class="secondary" id="tabSat">土曜</button><button type="button" class="secondary" id="tabHoliday">日祝</button></div><p class="note">現在編集中：<strong>${{weekday:'平日',sat:'土曜',holiday:'日祝'}[kind]}</strong>。基準日には「輪番①に当たる日」を入力してください。①〜⑤勤務・⑥⑦公休を4回繰り返します。中休ダイヤは中間開放の開始・終了も登録できます。平日・土曜・日祝を自動判別します。公休日は四半期ごとに自動移動します。実際の表と照合して使用してください。</p><form id="rosterForm"><label class="field">輪番①の基準日<input name="anchor" type="date" required value="${esc(anchor)}"></label><div class="rostergrid">${initial.map((x,i)=>`<div class="rosteritem ${i%7>=5?'off':''}"><strong>${i+1<10?'0':''}${i+1} ${i%7>=5?'公休':'勤務日'}</strong>${i%7>=5?'<small>固定公休（試作）</small>':`<input name="d${i}" placeholder="ダイヤ名／空欄なら空番" value="${esc(x.duty||'')}"><input name="s${i}" type="time" value="${esc(x.start||'')}"><input name="e${i}" type="time" value="${esc(x.end||'')}"><small>中間開放（中休のみ）</small><input name="ms${i}" type="time" aria-label="中間開放開始" value="${esc(x.midStart||'')}"><input name="me${i}" type="time" aria-label="中間開放終了" value="${esc(x.midEnd||'')}">`}</div>`).join('')}</div><div class="setupactions"><button type="submit" class="primary">輪番を保存</button><button type="button" class="secondary" data-close>キャンセル</button></div></form>`);$('rosterForm').onsubmit=e=>{e.preventDefault();let f=new FormData(e.target);for(let i=0;i<28;i++){let a=f.get('ms'+i),b=f.get('me'+i),st=f.get('s'+i),en=f.get('e'+i);if(Boolean(a)!==Boolean(b)){alert('中間開放の開始と終了は両方入力してください（輪番'+(i+1)+'）。');return}if(a&&!(minutes(st)<=minutes(a)&&minutes(a)<minutes(b)&&minutes(b)<=minutes(en))){alert('中間開放の時刻を確認してください（輪番'+(i+1)+'）。');return}}const entries=Array.from({length:28},(_,i)=>({duty:f.get('d'+i)||'',start:f.get('s'+i)||'',end:f.get('e'+i)||'',midStart:f.get('ms'+i)||'',midEnd:f.get('me'+i)||''}));roster={...(roster||{}),anchor:f.get('anchor')};if(kind==='weekday')roster.days=entries;else roster[kind]=entries;localStorage.setItem(rosterKey,JSON.stringify(roster));queueCloudSave();close();render()};$('tabWeek').onclick=()=>openRoster('weekday');$('tabSat').onclick=()=>openRoster('sat');$('tabHoliday').onclick=()=>openRoster('holiday');document.querySelectorAll('[data-close]').forEach(b=>b.onclick=close)}
+function lines(s){if(s.mode==='paid')return [s.base||s.duty||'勤務','有給'];if(s.mode==='off')return ['公休'];if(s.mode==='unset')return ['輪番未設定'];if(s.mode==='open')return ['空番'];if(s.mode==='assigned')return [s.base||'空番',s.duty||'ダイヤ未設定',s.start||'—',s.end||'—'];return [s.duty||s.base||'勤務',s.start||'—',s.end||'—']}
+function render(){if(view==='week'){renderWeekly();return} $('rosterStatus').textContent=roster?.anchor?'輪番：設定済み（基準日 '+roster.anchor+'）':'輪番：未設定（設定すると自動表示）'; $('monthTitle').textContent=`${year}年 ${month+1}月`;const first=new Date(year,month,1).getDay(),days=new Date(year,month+1,0).getDate(),total=Math.ceil((first+days)/7)*7;let html='';for(let i=0;i<total;i++){const d=i-first+1;if(d<1||d>days){html+='<div class="day outside"></div>';continue}const data=getDay(d),s=data.shift,items=lines(s),room=Math.max(0,6-items.length);const today=year===now.getFullYear()&&month===now.getMonth()&&d===now.getDate();html+=`<button class="day ${d===selected?'selected':''}" data-day="${d}"><span class="daynum ${today?'todaynum':''}">${d}</span><span class="shift ${s.mode==='paid'?'paid':s.mode==='unset'?'unset':s.mode==='off'||s.mode==='assigned'?'off':''}">${items.map(x=>`<span>${esc(x)}</span>`).join('')}</span>${data.events.slice(0,room).map(e=>`<span class="event">${esc(e.title)}</span>`).join('')}${data.events.length>room?`<span class="more">＋${data.events.length-room}件</span>`:''}</button>`} $('calendar').innerHTML=html;document.querySelectorAll('[data-day]').forEach(b=>b.onclick=()=>{selected=Number(b.dataset.day);render();openDayDetail()});$('selectedTitle').textContent=`${month+1}月${selected}日（${'日月火水木金土'[new Date(year,month,selected).getDay()]}）の予定`;const data=getDay(selected),s=data.shift;$('dayEntries').innerHTML=`<button class="entry" id="shiftEntry"><span><strong>${esc(lines(s)[0])}${s.mode==='paid'?' → 有給':s.mode==='assigned'?' → '+esc(s.duty):''}</strong><small>${s.mode==='paid'?'有給取得':s.mode==='off'?'公休':s.mode==='open'?'空番':esc(s.start)+' 〜 '+esc(s.end)}</small></span><span class="tag">勤務詳細 ›</span></button>`+data.events.map((e,i)=>`<button class="entry" data-event="${i}"><span><strong>${esc(e.title)}</strong><small>${esc(e.time||'時間指定なし')}</small></span><span class="tag">詳細 ›</span></button>`).join('');$('shiftEntry').onclick=()=>openShift();document.querySelectorAll('[data-event]').forEach(b=>b.onclick=()=>openEvent(Number(b.dataset.event)));}
+function show(content){$('modal').innerHTML=`<div class="shade" id="shade"><div class="sheet" role="dialog" aria-modal="true">${content}</div></div>`;$('shade').onclick=e=>{if(e.target.id==='shade')close()};document.querySelectorAll('[data-close]').forEach(b=>b.onclick=close)}function close(){$('modal').innerHTML=''}function head(title){return `<div class="sheethead"><h3>${title}</h3><button class="close" data-close aria-label="閉じる">×</button></div>`}
+// 月間・週間から共通で開く日付詳細。表示モードは変更しない。
+function openDayDetail(){
+ const dt=new Date(year,month,selected),label=`${year}年${month+1}月${selected}日（${'日月火水木金土'[dt.getDay()]}）`;
+ const data=getDay(selected),s=data.shift;
+ const summary=s.mode==='paid'?'有給':s.mode==='off'?'公休':s.mode==='open'?'空番':s.duty||s.base||'未設定';
+ const time=(s.mode==='normal'||s.mode==='assigned')&&s.start&&s.end?`${s.start} 〜 ${s.end}`:'';
+ const items=data.events.map((e,i)=>`<button class="entry" data-detail-event="${i}"><span><strong>${esc(e.title)}</strong><small>${esc(e.time||'時間指定なし')}${e.memo?' · '+esc(e.memo.slice(0,35)):''}</small></span><span class="tag">詳細・編集 ›</span></button>`).join('');
+ show(head(label+' の詳細')+`<p class="note">月間・週間どちらからも同じ内容を確認・編集できます。</p><div class="section-title"><h2>勤務</h2></div><button class="entry" id="detailShift"><span><strong>${esc(summary)}</strong><small>${esc(time||'勤務詳細・変更を確認')}</small></span><span class="tag">詳細・編集 ›</span></button><div class="section-title"><h2>予定</h2><button class="primary" id="detailAdd">＋ 予定を追加</button></div>${items||'<p class="empty">予定はまだありません。</p>'}<div class="actions"><button class="secondary" data-close>閉じる</button></div>`);
+ $('detailShift').onclick=()=>openShift();$('detailAdd').onclick=()=>openEvent();
+ document.querySelectorAll('[data-detail-event]').forEach(b=>b.onclick=()=>openEvent(Number(b.dataset.detailEvent)));
+ document.querySelectorAll('[data-close]').forEach(b=>b.onclick=close);
+}
+function openShift(edit=false){let s=getDay(selected).shift;if(!edit){show(head('勤務詳細')+`<div class="detail"><div><b>元の勤務</b>${esc(s.base||'—')}</div><div><b>状態</b>${esc(({normal:'通常勤務',off:'公休',open:'空番',unset:'輪番未設定',assigned:'勤務追加・変更',paid:'有給'})[s.mode])}</div><div><b>最終ダイヤ</b>${esc(s.mode==='paid'?'有給':s.duty||'—')}</div><div><b>出勤</b>${esc(s.mode==='paid'?'—':s.start||'—')}</div><div><b>退勤</b>${esc(s.mode==='paid'?'—':s.end||'—')}</div>${midInfo(s)||'<div><b>中間開放</b>登録なし</div>'}</div><div class="actions"><button class="primary" id="editShift">勤務を編集</button><button class="secondary" data-close>閉じる</button></div><p class="note">試作品の勤務データは仮のものです。元の勤務と変更後の勤務は別々に保持します。</p>`);$('editShift').onclick=()=>openShift(true);document.querySelectorAll('[data-close]').forEach(b=>b.onclick=close);return}show(head('勤務を編集')+`<form id="shiftForm"><label class="field">元の勤務<input name="base" value="${esc(s.base)}" placeholder="公休／空番／古賀1A"></label><label class="field">勤務状態<select name="mode">${[['normal','通常勤務'],['off','公休'],['open','空番'],['assigned','公休・空番から出勤／勤務変更'],['paid','有給']].map(([v,t])=>`<option value="${v}" ${s.mode===v?'selected':''}>${t}</option>`).join('')}</select></label><label class="field">最終ダイヤ<input name="duty" value="${esc(s.duty)}" placeholder="例：古賀1A"></label><label class="field">出勤時間<input name="start" type="time" value="${esc(s.start.length===4?'0'+s.start:s.start)}"></label><label class="field">退勤時間<input name="end" type="time" value="${esc(s.end.length===4?'0'+s.end:s.end)}"></label><label class="field">中間開放開始（中休のみ）<input name="midStart" type="time" value="${esc(s.midStart||'')}"></label><label class="field">中間開放終了（中休のみ）<input name="midEnd" type="time" value="${esc(s.midEnd||'')}"></label><div class="actions"><button class="primary" type="submit">保存する</button><button class="secondary" type="button" data-close>キャンセル</button></div></form>`);$('shiftForm').onsubmit=e=>{e.preventDefault();let f=new FormData(e.target),k=key(year,month,selected);store[k]??={};const a=f.get('midStart'),b=f.get('midEnd');if(Boolean(a)!==Boolean(b)){alert('中間開放の開始と終了は両方入力してください。');return}if(a&&!(minutes(f.get('start'))<=minutes(a)&&minutes(a)<minutes(b)&&minutes(b)<=minutes(f.get('end')))){alert('中間開放の時刻を確認してください。');return}store[k].shift=Object.fromEntries(['base','mode','duty','start','end','midStart','midEnd'].map(n=>[n,f.get(n)]));save();close();render()};document.querySelectorAll('[data-close]').forEach(b=>b.onclick=close)}
+function openEvent(i=null){let k=key(year,month,selected),ev=getDay(selected).events[i]||{title:'',time:'',memo:''};show(head(i===null?'予定を追加':'予定の詳細・編集')+`<form id="eventForm"><label class="field">予定名<input name="title" required maxlength="100" value="${esc(ev.title)}" placeholder="例：ジム、買い物、韓国語"></label><label class="field">時間（自由入力）<input name="time" maxlength="80" value="${esc(ev.time)}" placeholder="例：10:00〜11:30"></label><label class="field">メモ<textarea name="memo" placeholder="場所や持ち物など">${esc(ev.memo)}</textarea></label><div class="actions"><button class="primary" type="submit">保存する</button><button class="secondary" type="button" data-close>キャンセル</button>${i!==null?'<button class="secondary danger" type="button" id="deleteEvent">削除</button>':''}</div></form>`);$('eventForm').onsubmit=e=>{e.preventDefault();let f=new FormData(e.target);store[k]??={};store[k].events??=[];let item=Object.fromEntries(['title','time','memo'].map(n=>[n,f.get(n)]));if(i===null)store[k].events.push(item);else store[k].events[i]=item;save();close();render()};if(i!==null)$('deleteEvent').onclick=()=>{if(confirm('この予定を削除しますか？')){store[k]??={};store[k].events??=getDay(selected).events;store[k].events.splice(i,1);save();close();render()}};document.querySelectorAll('[data-close]').forEach(b=>b.onclick=close)}
+// Ver.0.4: device-to-device JSON backup. Export both persisted data sets without sending data to a server.
+function exportPlanner(){
+  try{
+    const payload={format:'my-planner-backup',version:1,exportedAt:new Date().toISOString(),roster:roster,store:store,weekly:weeklyNotes};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='my-planner-backup-'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+  }catch(err){alert('書き出しに失敗しました：'+err.message)}
+}
+function validRoster(r){
+  if(r===null)return true;
+  if(!r||typeof r!=='object'||Array.isArray(r)||typeof r.anchor!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(r.anchor)||!Array.isArray(r.days)||r.days.length!==28)return false;
+  return [r.days,...['sat','holiday'].filter(k=>r[k]!==undefined).map(k=>r[k])].every(arr=>Array.isArray(arr)&&arr.length===28&&arr.every(d=>d&&typeof d==='object'&&['duty','start','end'].every(k=>typeof d[k]==='string'&&d[k].length<=100)));
+}
+function validStore(v){
+  if(!v||typeof v!=='object'||Array.isArray(v))return false;
+  const entries=Object.entries(v);if(entries.length>10000)return false;
+  return entries.every(([k,d])=>/^\d{4}-\d{2}-\d{2}$/.test(k)&&d&&typeof d==='object'&&!Array.isArray(d)&&
+    (d.shift===undefined||(d.shift&&typeof d.shift==='object'&&['base','mode','duty','start','end'].every(n=>typeof d.shift[n]==='string'&&d.shift[n].length<=200)&&['midStart','midEnd'].every(n=>d.shift[n]===undefined||(typeof d.shift[n]==='string'&&d.shift[n].length<=200))))&&
+    (d.events===undefined||(Array.isArray(d.events)&&d.events.length<=100&&d.events.every(e=>e&&typeof e==='object'&&['title','time','memo'].every(n=>typeof e[n]==='string'&&e[n].length<=10000)))));
+}
+async function importPlanner(file){
+  if(!file)return;
+  if(file.size>5*1024*1024){alert('ファイルが大きすぎます（上限5MB）。');return}
+  try{
+    const payload=JSON.parse(await file.text());
+    if(!payload||payload.format!=='my-planner-backup'||payload.version!==1||!validRoster(payload.roster)||!validStore(payload.store))throw Error('このアプリのバックアップ形式ではないか、内容が不正です。');
+    const existing=Boolean(roster?.anchor)||Object.keys(store).length>0;
+    const question='バックアップを読み込みますか？\n\n輪番設定：'+(payload.roster?.anchor?'あり':'なし')+'\n予定を保存した日数：'+Object.keys(payload.store).length+'日'+(existing?'\n\n【注意】この端末の現在の輪番設定・予定はすべて上書きされます。必要なら先に「書き出す」でバックアップしてください。':'');
+    if(!confirm(question))return;
+    const newRoster=JSON.stringify(payload.roster),newStore=JSON.stringify(payload.store);const importedWeekly=payload.weekly===undefined?weeklyNotes:payload.weekly;if(!validWeekly(importedWeekly))throw Error('週間データの形式が不正です。');
+    // Keep the current in-memory state unchanged until both writes succeed.
+    const oldRoster=localStorage.getItem(rosterKey),oldStore=localStorage.getItem('planner_demo_v1'),oldWeekly=localStorage.getItem(weeklyKey);
+    try{localStorage.setItem(rosterKey,newRoster);localStorage.setItem('planner_demo_v1',newStore);localStorage.setItem(weeklyKey,JSON.stringify(importedWeekly))}catch(e){
+      if(oldRoster===null)localStorage.removeItem(rosterKey);else localStorage.setItem(rosterKey,oldRoster);
+      if(oldStore===null)localStorage.removeItem('planner_demo_v1');else localStorage.setItem('planner_demo_v1',oldStore);
+      if(oldWeekly===null)localStorage.removeItem(weeklyKey);else localStorage.setItem(weeklyKey,oldWeekly);throw e;
+    }
+    roster=payload.roster;store=payload.store;weeklyNotes=importedWeekly;queueCloudSave();render();alert('読み込みが完了しました！');
+  }catch(err){alert('読み込みに失敗しました：'+err.message)}
+}
+if(roster?.anchor&&Array.isArray(roster.days)&&roster.days.length===28){let changed=false;for(const kind of ['sat','holiday'])if(!Array.isArray(roster[kind])){roster[kind]=seededDays(kind);changed=true}if(changed)localStorage.setItem(rosterKey,JSON.stringify(roster))}
+
+function validWeekly(v){if(!v||typeof v!=='object'||Array.isArray(v)||Object.keys(v).length>1500)return false;return Object.entries(v).every(([k,x])=>/^\d{4}-\d{2}-\d{2}$/.test(k)&&x&&typeof x==='object'&&!Array.isArray(x)&&Array.isArray(x.goals)&&x.goals.length<=100&&x.goals.every(g=>g&&typeof g.text==='string'&&g.text.length<=300&&typeof g.done==='boolean')&&['memo','good','improve','next'].every(f=>typeof x[f]==='string'&&x[f].length<=10000))}
+function dateObj(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12)}
+function isoLocal(dt){return key(dt.getFullYear(),dt.getMonth(),dt.getDate())}
+function plusDays(dt,n){const d=new Date(dt);d.setDate(d.getDate()+n);return d}
+function mondayOf(dt){const d=new Date(dt);d.setHours(12,0,0,0);d.setDate(d.getDate()-(d.getDay()+6)%7);return d}
+function rosterOff(dt){const oldY=year,oldM=month;year=dt.getFullYear();month=dt.getMonth();try{return baseShift(dt.getDate()).mode==='off'}finally{year=oldY;month=oldM}}
+// 直前の連続公休2日が終わった翌日を、勤務週の初日とする。
+// 休みの当日は、その休みで終わる勤務週に属する。
+function workWeekOf(dt){const d=new Date(dt);d.setHours(12,0,0,0);for(let back=0;back<=18;back++){const start=plusDays(d,-back);if(rosterOff(plusDays(start,-1))&&rosterOff(plusDays(start,-2)))return start}return mondayOf(d)}
+function weeklyData(date){const oldY=year,oldM=month;year=date.getFullYear();month=date.getMonth();try{return getDay(date.getDate())}finally{year=oldY;month=oldM}}
+function weekRecord(k){return weeklyNotes[k]||{goals:[],memo:'',good:'',improve:'',next:''}}
+function setView(v){view=v;const w=v==='week';$('monthlyArea').hidden=w;$('monthlyBottom').hidden=w;$('weeklyArea').hidden=!w;$('monthView').classList.toggle('active',!w);$('weekView').classList.toggle('active',w);$('prev').hidden=w;$('next').hidden=w;$('todayBtn').hidden=w;$('monthTitle').hidden=w;if(w){weekStart=workWeekOf(new Date(year,month,selected));renderWeekly()}else render()}
+function weeklyMiniCalendar(){
+ const y=weekStart.getFullYear(),m=weekStart.getMonth(),first=new Date(y,m,1).getDay(),count=new Date(y,m+1,0).getDate();
+ const start=isoLocal(weekStart),end=isoLocal(plusDays(weekStart,6)),today=isoLocal(new Date());
+ let cells='<span class="mini-weekday">月</span><span class="mini-weekday">火</span><span class="mini-weekday">水</span><span class="mini-weekday">木</span><span class="mini-weekday">金</span><span class="mini-weekday">土</span><span class="mini-weekday">日</span>';
+ const lead=(first+6)%7;
+ for(let i=0;i<lead;i++)cells+='<span></span>';
+ for(let d=1;d<=count;d++){
+  const dt=new Date(y,m,d,12),date=isoLocal(dt),dow=dt.getDay();
+  const classes=[dow===6?'mini-sat':dow===0?'mini-sun':'',date>=start&&date<=end?'mini-inweek':'',date===today?'mini-today':''].filter(Boolean).join(' ');
+  cells+=`<button type="button" class="${classes}" data-mini-date="${date}" aria-label="${m+1}月${d}日の週へ移動">${d}</button>`;
+ }
+ return `<div class="weekly-panel"><div class="weekly-panel-title">▦ カレンダー</div><div class="weekly-content"><div class="weekly-mini-head"><button id="miniPrev" aria-label="前月">‹</button><span>${y}年${m+1}月</span><button id="miniNext" aria-label="次月">›</button></div><div class="weekly-mini-grid">${cells}</div><p class="weekly-hint">日付をタップするとその週へ移動</p></div></div>`;
+}
+function renderWeekly(){if(!weekStart)weekStart=workWeekOf(new Date(year,month,selected));const end=plusDays(weekStart,6),wk=isoLocal(weekStart),rec=weekRecord(wk);$('rosterStatus').textContent=roster?.anchor?'輪番：設定済み（基準日 '+roster.anchor+'）':'輪番：未設定';const startDow='日月火水木金土'[weekStart.getDay()],endDow='日月火水木金土'[end.getDay()];const dateLabel=`${weekStart.getMonth()+1}/${weekStart.getDate()}（${startDow}）〜 ${end.getMonth()+1}/${end.getDate()}（${endDow}）`;let days='';for(let i=0;i<7;i++){const dt=plusDays(weekStart,i),info=weeklyData(dt),s=info.shift,events=info.events||[],label=s.mode==='paid'?'有給':s.mode==='off'?'公休':s.mode==='open'?'空番':s.duty||s.base||'未設定',time=(s.mode==='normal'||s.mode==='assigned')&&s.start&&s.end?`${s.start}〜${s.end}`:'';const ev=events.length?`${events[0].title}${events.length>1?' ほか'+(events.length-1)+'件':''}`:'—';days+=`<button class="weekly-day ${dt.getDay()===6?'weekly-sat':dt.getDay()===0?'weekly-sun':''}" data-weekday="${isoLocal(dt)}"><span class="weekly-date"><small>${'日月火水木金土'[dt.getDay()]}</small><strong>${dt.getDate()}</strong></span><span class="weekly-main"><span class="weekly-shift"><strong>${esc(label)}</strong><small>${esc(time)}</small></span><div class="weekly-events">${esc(ev)}</div></span><span class="weekly-arrow">›</span></button>`}
+$('weeklyArea').innerHTML=`<div class="weekly-dates"><button id="weekPrev">‹ 前週</button><div class="weekly-date-label">${weekStart.getFullYear()}年 ${dateLabel}</div><button id="weekNext">次週 ›</button></div><div class="weekly-layout"><div class="weekly-panel"><div class="weekly-panel-title">今週の勤務・予定</div>${days}</div><div class="weekly-side">${weeklyMiniCalendar()}<div class="weekly-panel"><div class="weekly-panel-title">◎ 今週の目標</div><div class="weekly-content" id="goalArea">${rec.goals.map((g,i)=>`<label class="weekly-goal"><input type="checkbox" data-goal-check="${i}" ${g.done?'checked':''}><span style="${g.done?'text-decoration:line-through;color:#8190a2':''}">${esc(g.text)}</span><button type="button" class="weekly-goal-remove" data-goal-remove="${i}" aria-label="目標を削除">×</button></label>`).join('')||'<p class="weekly-hint">目標を追加してみよう</p>'}<button class="weekly-add" id="goalAdd">＋ 目標を追加</button></div></div><div class="weekly-panel"><div class="weekly-panel-title">✎ 今週のメモ</div><div class="weekly-content"><label class="weekly-field">自由メモ<textarea data-week-field="memo">${esc(rec.memo)}</textarea></label></div></div><div class="weekly-panel"><div class="weekly-panel-title">✓ 今週の振り返り</div><div class="weekly-content"><label class="weekly-field">できたこと<textarea data-week-field="good">${esc(rec.good)}</textarea></label><label class="weekly-field">改善したいこと<textarea data-week-field="improve">${esc(rec.improve)}</textarea></label><label class="weekly-field">来週に向けて<textarea data-week-field="next">${esc(rec.next)}</textarea></label><button class="weekly-save" id="weekSave">メモ・振り返りを保存</button><p class="weekly-hint">勤務と予定は月間と共通。日付をタップすると共通の詳細画面が開きます。</p></div></div></div></div>`;
+document.querySelectorAll('[data-mini-date]').forEach(b=>b.onclick=()=>{weekStart=workWeekOf(dateObj(b.dataset.miniDate));renderWeekly()});$('miniPrev').onclick=()=>{const d=new Date(weekStart.getFullYear(),weekStart.getMonth()-1,1,12);weekStart=workWeekOf(d);renderWeekly()};$('miniNext').onclick=()=>{const d=new Date(weekStart.getFullYear(),weekStart.getMonth()+1,1,12);weekStart=workWeekOf(d);renderWeekly()};$('weekPrev').onclick=()=>{weekStart=workWeekOf(plusDays(weekStart,-1));renderWeekly()};$('weekNext').onclick=()=>{weekStart=workWeekOf(plusDays(weekStart,8));renderWeekly()};document.querySelectorAll('[data-weekday]').forEach(b=>b.onclick=()=>{const dt=dateObj(b.dataset.weekday);year=dt.getFullYear();month=dt.getMonth();selected=dt.getDate();openDayDetail()});document.querySelectorAll('[data-goal-check]').forEach(b=>b.onchange=()=>{const r=weeklyNotes[wk]||structuredWeek(rec);r.goals[Number(b.dataset.goalCheck)].done=b.checked;weeklyNotes[wk]=r;saveWeekly();renderWeekly()});document.querySelectorAll('[data-goal-remove]').forEach(b=>b.onclick=e=>{e.preventDefault();const r=weeklyNotes[wk]||structuredWeek(rec);r.goals.splice(Number(b.dataset.goalRemove),1);weeklyNotes[wk]=r;saveWeekly();renderWeekly()});$('goalAdd').onclick=()=>{const t=prompt('今週の目標を入力してください');if(!t?.trim())return;const r=weeklyNotes[wk]||structuredWeek(rec);r.goals.push({text:t.trim().slice(0,300),done:false});weeklyNotes[wk]=r;saveWeekly();renderWeekly()};$('weekSave').onclick=()=>{const r=weeklyNotes[wk]||structuredWeek(rec);document.querySelectorAll('[data-week-field]').forEach(el=>r[el.dataset.weekField]=el.value);weeklyNotes[wk]=r;saveWeekly();alert('今週のメモと振り返りを保存しました！')};document.querySelectorAll('[data-week-field]').forEach(el=>el.onchange=()=>{const r=weeklyNotes[wk]||structuredWeek(rec);r[el.dataset.weekField]=el.value;weeklyNotes[wk]=r;saveWeekly()})}
+function structuredWeek(r){return {goals:r.goals.map(g=>({...g})),memo:r.memo,good:r.good,improve:r.improve,next:r.next}}
+
+// Cloud sync: never upload local data until the user explicitly chooses initial source.
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+let cloudUser=null,cloudReady=false,cloudRevision=0,cloudUnsub=null,cloudTimer=null,cloudWriting=false,cloudDirty=false,applyingRemote=false;
+const cloudStatus=$('cloudStatus'),cloudLock=$('cloudLock');
+function statusCloud(t){cloudStatus.textContent=t}
+function cloudPayload(){return {roster:roster??null,store:structuredClone(store),weekly:structuredClone(weeklyNotes)}}
+function hasLocal(){return Boolean(roster?.anchor)||Object.keys(store).length>0||Object.keys(weeklyNotes).length>0}
+function applyCloud(data){
+ if(!validRoster(data.roster)||!validStore(data.store)||!validWeekly(data.weekly))throw Error('クラウドのデータ形式が不正です');
+ applyingRemote=true;
+ try{roster=data.roster;store=data.store;weeklyNotes=data.weekly;
+ localStorage.setItem(rosterKey,JSON.stringify(roster));localStorage.setItem('planner_demo_v1',JSON.stringify(store));localStorage.setItem(weeklyKey,JSON.stringify(weeklyNotes));render();}
+ finally{applyingRemote=false}
+}
+function queueCloudSave(){if(applyingRemote||!cloudReady||!cloudUser)return;cloudDirty=true;statusCloud('☁️ 同期待ち…');clearTimeout(cloudTimer);cloudTimer=setTimeout(flushCloud,650)}
+async function flushCloud(){
+ if(!cloudReady||!cloudUser||cloudWriting||!cloudDirty)return;
+ cloudWriting=true;cloudDirty=false;const payload=cloudPayload(),user=cloudUser,baseRevision=cloudRevision;
+ try{
+  const result=await runTransaction(db,async tx=>{
+   const ref=doc(db,'planners',user.uid),snap=await tx.get(ref),remoteRevision=snap.exists()?snap.data().revision||0:0;
+   if(remoteRevision!==baseRevision)throw Error('別の端末で更新されています。再読み込みして内容を確認してください。');
+   tx.set(ref,{...payload,revision:remoteRevision+1,updatedAt:new Date().toISOString()});return remoteRevision+1;
+  });
+  cloudRevision=result;statusCloud('☁️ 同期済み');
+ }catch(e){cloudDirty=true;cloudReady=false;statusCloud('⚠️ 同期停止（端末に保存済み）');alert('クラウド同期に失敗しました。端末内のデータは残っています。\n'+e.message+'\n「データを書き出す」でバックアップしてください。');}
+ finally{cloudWriting=false;if(cloudDirty&&cloudReady)queueCloudSave()}
+}
+async function beginCloud(user){
+ cloudUser=user;cloudReady=false;cloudDirty=false;clearTimeout(cloudTimer);
+ if(cloudUnsub){cloudUnsub();cloudUnsub=null}
+ statusCloud('☁️ データを確認中…');
+ const ref=doc(db,'planners',user.uid);
+ try{
+  const snap=await getDoc(ref);const remote=snap.exists()?snap.data():null;
+  cloudRevision=remote?.revision||0;
+  if(remote){
+   if(hasLocal()){
+    const useCloud=confirm('クラウドにデータがあります。\n\n「OK」：クラウドのデータをこの端末に読み込む\n「キャンセル」：この端末のデータを残し、同期せず停止する\n\n※先にJSONバックアップを保存していない場合はキャンセルしてください。');
+    if(!useCloud){statusCloud('⚠️ 同期停止（端末データを保護）');return}
+   }
+   applyCloud(remote);
+  }else if(hasLocal()){
+   const upload=confirm('クラウドは空です。\n\nこの端末の輪番・予定・週間メモを最初のデータとしてアップロードしますか？\n\n※先に「データを書き出す」でJSONバックアップを保存しておくのがおすすめです。\nOK：アップロード / キャンセル：同期せず停止');
+   if(!upload){statusCloud('⚠️ 同期停止（端末データを保護）');return}
+   cloudReady=true;queueCloudSave();
+  }else {cloudReady=true;queueCloudSave()}
+  cloudReady=true;
+  cloudUnsub=onSnapshot(ref,snapshot=>{
+   if(!snapshot.exists()||snapshot.metadata.hasPendingWrites)return;
+   const data=snapshot.data(),rev=data.revision||0;
+   if(rev<=cloudRevision)return;
+   if(cloudDirty||cloudWriting){cloudReady=false;statusCloud('⚠️ 他端末との競合：同期停止');alert('別の端末で変更がありました。データ保護のため同期を停止しました。JSONを書き出してから再読み込みしてください。');return}
+   try{applyCloud(data);cloudRevision=rev;statusCloud('☁️ 同期済み')}catch(e){cloudReady=false;statusCloud('⚠️ 同期エラー');alert(e.message)}
+  },e=>{cloudReady=false;statusCloud('⚠️ 接続エラー：'+e.message)});
+  if(!cloudDirty)statusCloud('☁️ 同期済み');
+ }catch(e){statusCloud('⚠️ 接続できません：'+e.message);alert('Firebase接続エラー：'+e.message)}
+}
+async function login(){
+ try{await signInWithPopup(auth,new GoogleAuthProvider())}
+ catch(e){if(e.code==='auth/popup-blocked'||e.code==='auth/operation-not-supported-in-this-environment'){await signInWithRedirect(auth,new GoogleAuthProvider());return}alert('ログインできません：'+e.message)}
+}
+$('cloudLogin').onclick=login;$('lockLogin').onclick=login;
+$('cloudLogout').onclick=async()=>{if(cloudDirty){alert('同期されていない変更があります。先にJSONバックアップを保存してください。');return}await signOut(auth)};
+getRedirectResult(auth).catch(e=>{statusCloud('⚠️ ログインエラー');$('lockMessage').textContent=e.message});
+onAuthStateChanged(auth,user=>{
+ if(!user){cloudUser=null;cloudReady=false;clearTimeout(cloudTimer);if(cloudUnsub){cloudUnsub();cloudUnsub=null}cloudLock.hidden=false;document.body.classList.add('locked');$('cloudLogin').hidden=false;$('cloudLogout').hidden=true;statusCloud('🔒 ログイン待ち');return}
+ cloudLock.hidden=true;document.body.classList.remove('locked');$('cloudLogin').hidden=true;$('cloudLogout').hidden=false;beginCloud(user)
+});
+
+$('monthView').onclick=()=>setView('month');$('weekView').onclick=()=>setView('week');
+
+$('exportData').onclick=exportPlanner;
+$('importData').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{const file=e.target.files?.[0];await importPlanner(file);e.target.value=''};
+$('add').onclick=()=>openEvent();$('rosterBtn').onclick=()=>openRoster();function move(n){month+=n;if(month<0){year--;month=11}if(month>11){year++;month=0}selected=1;render()}$('prev').onclick=()=>move(-1);$('next').onclick=()=>move(1);$('todayBtn').onclick=()=>{year=now.getFullYear();month=now.getMonth();selected=now.getDate();render()};render();
+</script></body></html>
